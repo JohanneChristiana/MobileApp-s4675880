@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondScreenActivity">
+    tools:context=".SecondScreenActivity"
+    android:background="@color/white">
 
     <!--Heading-->
     <RelativeLayout
@@ -26,16 +27,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/good1"
+                android:textColor="@color/black"
                 android:textSize="32sp"
-                android:layout_marginEnd="70dp"
+                android:layout_marginEnd="55dp"
                 android:textStyle="bold"
                 />
+            <!--Input Username Here-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
+                android:textColor="@color/black"
                 android:textSize="25sp"
-                android:layout_marginEnd="105dp"
+                android:layout_marginEnd="90dp"
                 />
         </LinearLayout>
 
@@ -93,7 +97,6 @@
 
                     <!--Notification Button-->
 
-
                     <!--Schedule Button-->
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -120,6 +123,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/sch_next_class"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="17sp"
                             android:alpha="0.7"/>
@@ -130,26 +134,26 @@
                             android:layout_below="@+id/sch1"
                             android:layout_marginTop="4dp"
                             android:text="@string/sch_date_time"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
-                            android:textSize="17sp"/>
+                            android:textSize="17sp"
+                            />
                         <TextView
                             android:id="@+id/sch3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/sch2"
                             android:text="@string/sch_course_name"
+                            android:textColor="@color/black"
                             android:textSize="13sp"/>
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-
-
-        <!--Search-->
-
-
-        <!--Recommended Section-->
+        <!--Your Details-->
+        <!--This part of the code will showcase the details
+        that the users input on the sign in page-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -160,16 +164,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/reco">
-
+                android:text="@string/details"
+                android:textColor="@color/black">
             </TextView>
 
 
         </LinearLayout>
-
-
     </RelativeLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
