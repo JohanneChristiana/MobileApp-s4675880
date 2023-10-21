@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Initialize Button
         findViewById<EditText>(R.id.usernameInput).addTextChangedListener {
             usernameInput = it.toString()
         }
