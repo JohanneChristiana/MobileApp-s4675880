@@ -6,8 +6,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -24,10 +29,24 @@ class MainActivity : AppCompatActivity() {
             .build()
 
     }
+    // Getting the loginApi from Retrofit
+    private val loginApi: LoginApi by lazy {
+        retrofit.create(LoginApi::class.java)
+    }
+
+    // Creating a Live Data (Implementing to observe pattern to observe response)
+    private val loginResponseLiveData = MutableLiveData<LoginResponse?>(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main) // Layout Resource
+
+        // Response when login is successful
+        loginResponseLiveData.observe (this) { // Observe any changes to LoginResponse
+            it?.let{ response ->
+                Toast.makeText(this, "${response.message}", Toast.LENGTH_LONG).show() // Length_long stays on screen longer
+            }
+        }
 
         // Initialize Button
         findViewById<EditText>(R.id.usernameInput).addTextChangedListener {
@@ -40,30 +59,10 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize Button
         findViewById<EditText>(R.id.btnSecondScreen).setOnClickListener {
-            //Retrofit call here
-
+            CoroutineScope(Dispatchers.IO).launch {
+                // This Needs to be executed inside a Background Thread (That's why CaroutineScope)
+                loginApi.login(username = usernameInput, password = passwordInput)
+            }
         }
     }
 }
-
-
-//    //Intent pt.1
-//    private val intentToNavigateToSecondScreen by lazy {
-//        Intent(this, SecondScreenActivity::class.java)
-//    }
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main) // Layout Resource
-//
-//        // Initialize Button
-//        button = findViewById(R.id.btnSecondScreen) as? AppCompatButton;
-//
-//        button?.setOnClickListener {
-//            Log.d("App", "Button Clicked")
-//
-//            //Intent pt.2
-//            startActivity(intentToNavigateToSecondScreen)
-//        }
-//
-//    }
-//}
