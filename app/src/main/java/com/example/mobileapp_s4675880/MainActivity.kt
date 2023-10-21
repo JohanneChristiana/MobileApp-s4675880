@@ -8,11 +8,22 @@ import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.widget.addTextChangedListener
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
     // Variable for Button
     private var usernameInput = ""
     private var passwordInput = ""
+
+    // Retrofit Object
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://catfact.ninja") // Base URL
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         // Initialize Button
         findViewById<EditText>(R.id.btnSecondScreen).setOnClickListener {
             //Retrofit call here
-
 
         }
     }
