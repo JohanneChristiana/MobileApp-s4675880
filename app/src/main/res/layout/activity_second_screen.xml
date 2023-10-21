@@ -181,7 +181,7 @@
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/username"
+                android:text="@string/user"
                 android:textColor="@color/black">
             </TextView>
 
@@ -190,7 +190,7 @@
                 android:id="@+id/password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/password"
+                android:text="@string/pass"
                 android:textColor="@color/black">
             </TextView>
 

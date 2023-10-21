@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
@@ -17,9 +18,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
-    // Variable for Button
-    private var usernameInput = ""
-    private var passwordInput = ""
+    // Variable for input
+    private var username = ""
+    private var password = ""
 
     // Retrofit Object
     private val retrofit: Retrofit by lazy {
@@ -49,20 +50,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<EditText>(R.id.usernameInput).addTextChangedListener {
-            usernameInput = it.toString()
+            username = it.toString()
         }
 
         findViewById<EditText>(R.id.passwordInput).addTextChangedListener {
-            passwordInput = it.toString()
+            password = it.toString()
         }
 
         // Initialize Button
-        findViewById<AppCompatButton>(R.id.btnSecondScreen).setOnClickListener {
+        findViewById<Button>(R.id.btnSecondScreen).setOnClickListener {
             // Always use Dispatchers.Main when handling with Live Data
             CoroutineScope(Dispatchers.Main).launch {
                 try {
                     // This Needs to be executed inside a Background Thread (That's why CaroutineScope)
-                    loginResponseLiveData.value =  loginApi.login(username = usernameInput, password = passwordInput)
+                    loginResponseLiveData.value =  loginApi.login(username = username, password = password)
                 } catch (e: Exception) {
                     loginResponseLiveData.value = LoginResponse(message = "Network call failed $e")
                 }
