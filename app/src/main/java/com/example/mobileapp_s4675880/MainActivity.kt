@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     // Retrofit Object
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://catfact.ninja") // Base URL
+            .baseUrl("https://80fe-218-214-181-163.ngrok-free.app") // Base URL API using ngrok
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
@@ -58,10 +58,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Initialize Button
-        findViewById<EditText>(R.id.btnSecondScreen).setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                // This Needs to be executed inside a Background Thread (That's why CaroutineScope)
-                loginApi.login(username = usernameInput, password = passwordInput)
+        findViewById<AppCompatButton>(R.id.btnSecondScreen).setOnClickListener {
+            // Always use Dispatchers.Main when handling with Live Data
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    // This Needs to be executed inside a Background Thread (That's why CaroutineScope)
+                    loginResponseLiveData.value =  loginApi.login(username = usernameInput, password = passwordInput)
+                } catch (e: Exception) {
+                    loginResponseLiveData.value = LoginResponse(message = "Network call failed $e")
+                }
             }
         }
     }
