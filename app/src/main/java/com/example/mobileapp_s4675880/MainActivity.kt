@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     // Retrofit Object
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://80fe-218-214-181-163.ngrok-free.app") // Base URL API using ngrok
+            .baseUrl("https://5f95-218-214-181-163.ngrok-free.app") // Base URL API using ngrok
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
