@@ -11,9 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
             .build()
 
     }
+
     // Getting the loginApi from Retrofit
     private val loginApi: LoginApi by lazy {
         retrofit.create(LoginApi::class.java)
@@ -41,13 +44,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main) // Layout Resource
-
-        // Response when login is successful
-        loginResponseLiveData.observe (this) { // Observe any changes to LoginResponse
-            it?.let{ response ->
-                Toast.makeText(this, "${response.message}", Toast.LENGTH_LONG).show() // Length_long stays on screen longer
-            }
-        }
 
         findViewById<EditText>(R.id.usernameInput).addTextChangedListener {
             username = it.toString()
@@ -62,8 +58,23 @@ class MainActivity : AppCompatActivity() {
             // Always use Dispatchers.Main when handling with Live Data
             CoroutineScope(Dispatchers.Main).launch {
                 try {
-                    // This Needs to be executed inside a Background Thread (That's why CaroutineScope)
-                    loginResponseLiveData.value =  loginApi.login(username = username, password = password)
+                    loginResponseLiveData.value = loginApi.login(username = username, password = password)
+
+                    loginResponseLiveData.observe(this@MainActivity) { // Observe any changes to LoginResponse
+                        it?.let{ response ->
+                            if (loginResponseLiveData.value?.isSuccessful == true) {
+                                // Navigate to new activity
+                                val intent = Intent(this@MainActivity, SecondScreenActivity::class.java)
+                                startActivity(intent)
+                            } else { // Show a toast message if the login response is not successful
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "${response.message}",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        }
+                    }
                 } catch (e: Exception) {
                     loginResponseLiveData.value = LoginResponse(message = "Network call failed $e")
                 }
@@ -71,3 +82,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
