@@ -1,7 +1,10 @@
 package com.example.mobileapp_s4675880
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileapp_s4675880.models.ListItemDataModel
 import com.example.mobileapp_s4675880.recyclerviewcomponents.MyRecyclerviewAdapter
@@ -11,9 +14,18 @@ class CourseActivity : AppCompatActivity() {
     private val recyclerView: RecyclerView by lazy {
         findViewById(R.id.homeScreenRecyclerView)
     }
+
+    // Variable for Button
+    private var button: AppCompatButton? = null
+
+    //Intent pt.1
+    private val intentToNavigateToMainActivity by lazy {
+        Intent(this, MainActivity::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        setContentView(R.layout.activity_main2) // Layout Resource
 
         recyclerView.adapter = MyRecyclerviewAdapter(
             context = this,
@@ -36,5 +48,14 @@ class CourseActivity : AppCompatActivity() {
                 ListItemDataModel("Pop Art", "VA107-PAT", "Pop Art and beyond")
             )
         )
+        // Initialize Button
+        button = findViewById(R.id.btn_back_recycler) as? AppCompatButton;
+
+        button?.setOnClickListener {
+            Log.d("App", "Button Clicked")
+
+            //Intent pt.2
+            startActivity(intentToNavigateToMainActivity)
+        }
     }
 }
