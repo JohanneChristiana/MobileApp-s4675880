@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     // Retrofit Object
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://f6b4-131-170-5-4.ngrok-free.app") // Base URL API using ngrok
+            .baseUrl("https://5ba2-131-170-5-4.ngrok-free.app") // Base URL API using ngrok
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
@@ -40,10 +40,6 @@ class MainActivity : AppCompatActivity() {
 
     // Creating a Live Data (Implementing to observe pattern to observe response)
     private val loginResponseLiveData = MutableLiveData<LoginResponse?>(null)
-
-    //Intents
-    private val intentToNavigateToCourseActivity by lazy {Intent(this, CourseActivity::class.java)}
-    private val intentToNavigateToSecondScreenActivity by lazy {Intent(this, SecondScreenActivity::class.java)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +65,8 @@ class MainActivity : AppCompatActivity() {
                             // If the property is not null and the login was successful...
                             if (loginResponseLiveData.value?.isSuccessful == true) {
                                 // Navigate to new activity
-                                runOnUiThread {startActivity(intentToNavigateToSecondScreenActivity)}
+                                val intent1 = Intent(this@MainActivity, SecondScreenActivity::class.java)
+                                startActivity(intent1)
                             } else { // Show a toast message if the login response is not successful
                                 Toast.makeText(
                                     this@MainActivity,
@@ -96,8 +93,8 @@ class MainActivity : AppCompatActivity() {
                         it?.let{ response ->
                             if (loginResponseLiveData.value?.isSuccessful == true) {
                                 // Navigate to new activity
-                                runOnUiThread {
-                                startActivity(intentToNavigateToCourseActivity)}
+                                val intent2= Intent(this@MainActivity, CourseActivity::class.java)
+                                startActivity(intent2)
                             } else { // Show a toast message if the login response is not successful
                                 Toast.makeText(
                                     this@MainActivity,
