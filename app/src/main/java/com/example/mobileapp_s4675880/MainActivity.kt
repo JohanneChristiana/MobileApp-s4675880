@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     // Variable for input
     private var username = ""
     private var password = ""
-    private var button: AppCompatButton? = null
 
     // Retrofit Object
     private val retrofit: Retrofit by lazy {
@@ -67,9 +66,10 @@ class MainActivity : AppCompatActivity() {
 
                     loginResponseLiveData.observe(this@MainActivity) { // Observe any changes to LoginResponse
                         it?.let{ response ->
+                            // If the property is not null and the login was successful...
                             if (loginResponseLiveData.value?.isSuccessful == true) {
                                 // Navigate to new activity
-                                startActivity(intentToNavigateToSecondScreenActivity)
+                                runOnUiThread {startActivity(intentToNavigateToSecondScreenActivity)}
                             } else { // Show a toast message if the login response is not successful
                                 Toast.makeText(
                                     this@MainActivity,
@@ -96,7 +96,8 @@ class MainActivity : AppCompatActivity() {
                         it?.let{ response ->
                             if (loginResponseLiveData.value?.isSuccessful == true) {
                                 // Navigate to new activity
-                                startActivity(intentToNavigateToCourseActivity)
+                                runOnUiThread {
+                                startActivity(intentToNavigateToCourseActivity)}
                             } else { // Show a toast message if the login response is not successful
                                 Toast.makeText(
                                     this@MainActivity,
@@ -111,15 +112,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-//        // Initialize Button for RecyclerView
-//        button = findViewById(R.id.btnCourseActivity) as? AppCompatButton;
-//
-//        button?.setOnClickListener {
-//            Log.d("App", "Button Clicked")
-//
-//            //Intent pt.2
-//            startActivity(intentToNavigateToCourseActivity)
-//        }
     }
 }
 
