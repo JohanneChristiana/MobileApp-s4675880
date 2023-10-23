@@ -66,7 +66,7 @@
             <!--Margin spacing-->
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="25dp" />
+                android:layout_height="20dp" />
             <!--Username Placeholder-->
             <EditText
                 android:layout_width="match_parent"
@@ -107,7 +107,7 @@
                 android:text="@string/forgot"
                 android:textColor="@color/blue_base"
                 android:textStyle="bold"
-                android:layout_margin="25dp"/>
+                android:layout_margin="20dp"/>
 
             <!--Sign in Button-->
             <androidx.appcompat.widget.AppCompatButton
@@ -122,7 +122,22 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="75dp" />
+                android:layout_height="10dp" />
+
+            <!--RecyclerView Button-->
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCourseActivity"
+                android:text="@string/recycle"
+                android:background="@drawable/shape_btn_sign"
+                android:textColor="@color/white"
+                android:padding="25dp">
+            </androidx.appcompat.widget.AppCompatButton>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="45dp" />
 
         </LinearLayout>
 

@@ -8,6 +8,8 @@
     <string name="enter_pass">Enter your password</string>
     <string name="forgot">Forgot Password?</string>
     <string name="sign">Sign in</string>
+    <string name="recycle">RecyclerView</string>
+    <string name="recycle_head">This is the RecyclerView for CourseActivity</string>
 
     <!--Second Screen Page-->
     <string name="good1">Good Morning!</string>
@@ -22,5 +24,7 @@
     <string name="details">Your Details</string>
     <string name="user">Username: </string>
     <string name="pass">Password: </string>
+
+
 
 </resources>

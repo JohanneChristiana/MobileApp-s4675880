@@ -23,11 +23,12 @@ class MainActivity : AppCompatActivity() {
     // Variable for input
     private var username = ""
     private var password = ""
+    private var button: AppCompatButton? = null
 
     // Retrofit Object
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://5f95-218-214-181-163.ngrok-free.app") // Base URL API using ngrok
+            .baseUrl("https://f6b4-131-170-5-4.ngrok-free.app") // Base URL API using ngrok
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
@@ -41,6 +42,10 @@ class MainActivity : AppCompatActivity() {
     // Creating a Live Data (Implementing to observe pattern to observe response)
     private val loginResponseLiveData = MutableLiveData<LoginResponse?>(null)
 
+    //Intents
+    private val intentToNavigateToCourseActivity by lazy {Intent(this, CourseActivity::class.java)}
+    private val intentToNavigateToSecondScreenActivity by lazy {Intent(this, SecondScreenActivity::class.java)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main) // Layout Resource
@@ -53,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             password = it.toString()
         }
 
-        // Initialize Button
+        // Initialize Button for Login
         findViewById<Button>(R.id.btnSecondScreen).setOnClickListener {
             // Always use Dispatchers.Main when handling with Live Data
             CoroutineScope(Dispatchers.Main).launch {
@@ -64,8 +69,7 @@ class MainActivity : AppCompatActivity() {
                         it?.let{ response ->
                             if (loginResponseLiveData.value?.isSuccessful == true) {
                                 // Navigate to new activity
-                                val intent = Intent(this@MainActivity, SecondScreenActivity::class.java)
-                                startActivity(intent)
+                                startActivity(intentToNavigateToSecondScreenActivity)
                             } else { // Show a toast message if the login response is not successful
                                 Toast.makeText(
                                     this@MainActivity,
@@ -80,6 +84,42 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        // Initialize Button for CourseActivity
+        findViewById<Button>(R.id.btnCourseActivity).setOnClickListener {
+            // Always use Dispatchers.Main when handling with Live Data
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    loginResponseLiveData.value = loginApi.login(username = username, password = password)
+
+                    loginResponseLiveData.observe(this@MainActivity) { // Observe any changes to LoginResponse
+                        it?.let{ response ->
+                            if (loginResponseLiveData.value?.isSuccessful == true) {
+                                // Navigate to new activity
+                                startActivity(intentToNavigateToCourseActivity)
+                            } else { // Show a toast message if the login response is not successful
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "${response.message}",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    loginResponseLiveData.value = LoginResponse(message = "Network call failed $e")
+                }
+            }
+        }
+//        // Initialize Button for RecyclerView
+//        button = findViewById(R.id.btnCourseActivity) as? AppCompatButton;
+//
+//        button?.setOnClickListener {
+//            Log.d("App", "Button Clicked")
+//
+//            //Intent pt.2
+//            startActivity(intentToNavigateToCourseActivity)
+//        }
     }
 }
 

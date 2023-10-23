@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <!--Internet permission-->
+    <!-- Internet permission -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -16,11 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MobileApps4675880"
         tools:targetApi="34">
-        <!--Second Screen Activity-->
+        <!-- Course Activity -->
+        <activity
+            android:name=".CourseActivity"
+            android:exported="false" />
+        <!-- Second Screen Activity -->
         <activity
             android:name=".SecondScreenActivity"
             android:exported="false" />
-        <!--Main Screen Activity-->
+        <!-- Main Screen Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
