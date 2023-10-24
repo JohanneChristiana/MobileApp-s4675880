@@ -1,12 +1,22 @@
 package com.example.mobileapp_s4675880
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 
 class SecondScreenActivity : AppCompatActivity() {
+
+
+
+//    private fun SharedPreferences.putString(user: String, pass: String) {
+//        fun SharedPreferences.commit() {
+//        }
+//    }
+//
+//    val sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE)
+//    val username = sharedPreferences.getString("username", null)
 
     // Variable for Button
     private var button: AppCompatButton? = null
@@ -29,6 +39,13 @@ class SecondScreenActivity : AppCompatActivity() {
             //Intent pt.2
             startActivity(intentToNavigateToMainActivity)
         }
+
+//        binding.saveButton.setOnClickListener {
+//            // To retrieve the data use get
+//            val storedUser = sharedPreferences.getString("user", "") //null, it will add a default value, that will be returned if there is not value associated with key note
+//            binding.usernameInput.text = "${storedUser}"
+        }
+
     }
-}
+
 

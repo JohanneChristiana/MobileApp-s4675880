@@ -6,14 +6,14 @@
     <string name="login2">To the University Course Registration App</string>
     <string name="enter_user">Enter your username</string>
     <string name="enter_pass">Enter your password</string>
-    <string name="forgot">Forgot Password?</string>
+    <string name="save">Remember me</string>
     <string name="sign">Sign in</string>
     <string name="recycle">RecyclerView</string>
 
 
     <!--Second Screen Page-->
     <string name="good1">Good Morning!</string>
-    <string name="name">Loraine Asis</string>
+<!--<string name="name">Loraine Asis</string>-->
     <string name="sch_next_class">NEXT CLASS</string>
     <string name="sch_date_time">Mon 09, 10:00am</string>
     <string name="sch_course_name">Introduction to Digital Artworks</string>
@@ -22,8 +22,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="details">Your Details</string>
-    <string name="user">Username: </string>
-    <string name="pass">Password: </string>
+    <string name="user">user</string>
+    <string name="pass">pass</string>
 
     <!--RecyclerView & Back Button-->
     <string name="recycle_head">This is the RecyclerView for CourseActivity</string>
