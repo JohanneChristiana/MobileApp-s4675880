@@ -26,9 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     // Store data using Shared Preferences
 
-    //binding
-    private lateinit var binding: ActivityMainBinding
-
     //  Declare shared preferences
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -54,10 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Binding pt.2
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-//        setContentView(R.layout.activity_main) // Layout Resource
+        setContentView(R.layout.activity_main) // Layout Resource
 
 
         findViewById<EditText>(R.id.usernameInput).addTextChangedListener {
@@ -67,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.passwordInput).addTextChangedListener {
             password = it.toString()
         }
+
 
 //        val sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE)
 //        val userSave = sharedPreferences.putString("user", username)
@@ -86,40 +81,29 @@ class MainActivity : AppCompatActivity() {
                         it?.let{ response ->
                             // If the property is not null and the login was successful...
                             if (loginResponseLiveData.value?.isSuccessful == true) {
+
                                 // Save the login state in shared preferences, -> Initialize SharedPreferences
                                 val sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE)
 
                                 // Whatever the text user will write in usernameInput it will be stored in user variable
-                                binding.saveButton.setOnClickListener{
-                                    val user = binding.usernameInput.text.toString()
-                                    val pass = binding.passwordInput.text.toString()
-                                    //access mode, the preference can be modified or edited
-                                    val sharedEdit = sharedPreferences.edit()
-                                    // store preference using a key
-                                    sharedEdit.putString("user", username).apply()
-                                    sharedEdit.putString("pass", password).apply()
+                                val user = username
+                                val pass = password
 
-                                    binding.usernameInput.text.clear()
-                                    binding.passwordInput.text.clear()
+                                //access mode, the preference can be modified or edited (edit())
+                                // store preference using a key
+                                sharedPreferences.edit().putString("user", username).apply()
+                                sharedPreferences.edit().putString("pass", password).apply()
 
-                                }
-                                binding.saveButton.setOnClickListener {
-                                    // To retrieve the data use get
-                                    val storedUser = sharedPreferences.getString(
-                                        "user",
-                                        "")
-                                    val storedPass = sharedPreferences.getString(
-                                        "pass",
-                                        "") //null, it will add a default value, that will be returned if there is not value associated with key note
-                                    val username = sharedPreferences.getString("username", "")
-                                    val password = sharedPreferences.getString("password", "")
-                                    binding.usernameInput.text = "${storedUser}"
-                                    binding.passwordInput.text = "${storedPass}"
-                                }
+                                // To retrieve the data use get
+                                //null, it will add a default value, that will be returned if there is not value associated with key note
+                                    val storedUser = sharedPreferences.getString("username", "")
+                                    val storedPass = sharedPreferences.getString("password", "")
 
                                 // Navigate to second screen activity
                                 val intent1 = Intent(this@MainActivity, SecondScreenActivity::class.java)
                                 startActivity(intent1)
+                                username = "${storedUser}"
+                                password = "${storedPass}"
 
                             } else { // Show a toast message if the login response is not successful
                                 Toast.makeText(

@@ -39,11 +39,6 @@ class SecondScreenActivity : AppCompatActivity() {
             //Intent pt.2
             startActivity(intentToNavigateToMainActivity)
         }
-
-//        binding.saveButton.setOnClickListener {
-//            // To retrieve the data use get
-//            val storedUser = sharedPreferences.getString("user", "") //null, it will add a default value, that will be returned if there is not value associated with key note
-//            binding.usernameInput.text = "${storedUser}"
         }
 
     }

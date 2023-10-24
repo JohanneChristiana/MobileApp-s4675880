@@ -182,6 +182,7 @@
                 android:id="@+id/userTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="user"
                 android:textColor="@color/black"
                 >
                 <!--android:text="userTextView"-->
@@ -192,6 +193,7 @@
                 android:id="@+id/passTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="pass"
                 android:textColor="@color/black"
                 >
                 <!--android:text="passTextView"-->
