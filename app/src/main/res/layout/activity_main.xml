@@ -101,14 +101,14 @@
                 android:padding="20dp" />
 
             <!--Save-->
-            <Button
+            <TextView
                 android:id="@+id/saveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save"
-                android:textColor="@color/white"
+                android:text="@string/forgot"
+                android:textColor="@color/blue_base"
                 android:textStyle="bold"
-                android:layout_margin="10dp"/>
+                android:layout_margin="20dp"/>
 
             <!--Sign in Button-->
             <androidx.appcompat.widget.AppCompatButton

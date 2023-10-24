@@ -6,7 +6,7 @@
     <string name="login2">To the University Course Registration App</string>
     <string name="enter_user">Enter your username</string>
     <string name="enter_pass">Enter your password</string>
-    <string name="save">Remember me</string>
+    <string name="forgot">Forgot Password?</string>
     <string name="sign">Sign in</string>
     <string name="recycle">RecyclerView</string>
 
@@ -24,6 +24,7 @@
     <string name="details">Your Details</string>
     <string name="user">user</string>
     <string name="pass">pass</string>
+    <string name="logout">Logout</string>
 
     <!--RecyclerView & Back Button-->
     <string name="recycle_head">This is the RecyclerView for CourseActivity</string>

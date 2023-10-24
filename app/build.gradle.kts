@@ -55,4 +55,6 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.4.0")
 
+    implementation ("androidx.fragment:fragment-ktx:1.4.0")
+
 }
